@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Planes Premium | AI Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+<style>
+:root {
+--primary: #00d2ff;
+--gold: #fbc531;
+--bg: #0f172a;
+--glass: rgba(255, 255, 255, 0.03);
+--border: rgba(255, 255, 255, 0.1);
+}
+
+body {
+font-family: 'Poppins', sans-serif;
+background: radial-gradient(circle at bottom left, #1e293b, #0f172a);
+color: white;
+display: flex;
+flex-direction: column;
+align-items: center;
+min-height: 100vh;
+margin: 0;
+padding: 20px;
+}
+
+h1 { margin-top: 50px; background: linear-gradient(to right, #fff, var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 2.5rem; }
+
+.container {
+display: flex;
+gap: 30px;
+justify-content: center;
+margin-top: 50px;
+flex-wrap: wrap;
+}
+
+.pricing-card {
+background: var(--glass);
+backdrop-filter: blur(15px);
+border: 1px solid var(--border);
+border-radius: 24px;
+padding: 40px;
+width: 300px;
+text-align: center;
+transition: 0.3s;
+position: relative;
+}
+
+.pricing-card:hover {
+transform: translateY(-10px);
+border-color: var(--primary);
+box-shadow: 0 15px 30px rgba(0, 210, 255, 0.15);
+}
+
+.plan-name { font-size: 1.2rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 2px; }
+.price { font-size: 3.5rem; font-weight: 600; margin: 20px 0; }
+.price span { font-size: 1rem; color: #64748b; }
+
+.features { list-style: none; padding: 0; margin: 30px 0; color: #cbd5e1; text-align: left; }
+.features li { margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+.features li::before { content: "✓"; color: var(--primary); font-weight: bold; }
+
+.btn-pay {
+width: 100%;
+padding: 15px;
+border-radius: 12px;
+border: none;
+background: linear-gradient(135deg, var(--primary), #3a7bd5);
+color: white;
+font-weight: 600;
+cursor: pointer;
+transition: 0.3s;
+}
+
+.popular {
+border: 1px solid var(--gold) !important;
+}
+.popular-tag {
+position: absolute;
+top: -15px;
+left: 50%;
+transform: translateX(-50%);
+background: var(--gold);
+color: #000;
+padding: 5px 15px;
+border-radius: 20px;
+font-size: 0.8rem;
+font-weight: bold;
+}
+</style>
+</head>
+<body>
+
+<h1>Eleva tu Negocio con IA</h1>
+<p style="color: #64748b;">Pagos seguros vía MetaMask (USDT/ETH)</p>
+
+<div class="container">
+<div class="pricing-card">
+<div class="plan-name">Mensual</div>
+<div class="price">$20<span>/mes</span></div>
+<ul class="features">
+<li>Bot personalizado</li>
+<li>Redes Sociales ilimitadas</li>
+<li>Soporte 24/7</li>
+<li>API Gemini Flash</li>
+</ul>
+<button class="btn-pay" onclick="payWithMetaMask(20)">Pagar con MetaMask</button>
+</div>
+
+<div class="pricing-card popular">
+<div class="popular-tag">MÁS AHORRO</div>
+<div class="plan-name">Trimestral</div>
+<div class="price">$50<span>/3 meses</span></div>
+<ul class="features">
+<li>Todo lo del plan Mensual</li>
+<li>Prioridad en IA</li>
+<li>Sin marca de agua</li>
+<li>Ahorras $10</li>
+</ul>
+<button class="btn-pay" onclick="payWithMetaMask(50)" style="background: var(--gold); color: black;">Pagar con MetaMask</button>
+</div>
+</div>
+
+<script>
+async function payWithMetaMask(amountInUSD) {
+if (typeof window.ethereum !== 'undefined') {
+try {
+const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+const account = accounts[0];
+
+// Aquí definirías la conversión a ETH o usarías un contrato de USDT
+// Por simplicidad, este ejemplo muestra la intención de envío a tu wallet:
+const myWallet = "0x5572905245624E6cC5116F444c019ddc47F87829"; // NOTA: AQUÍ DEBES PONER TU DIRECCIÓN 0x...
+                    
+alert(`Conectado: ${account}\nProcediendo a pagar $${amountInUSD} a tu cuenta.`);
+                    
+// Lógica de transferencia real con ethers.js iría aquí
+} catch (error) {
+alert("Error al conectar con MetaMask");
+}
+} else {
+alert("Por favor instala MetaMask para realizar el pago.");
+}
+}
+</script>
+</body>
+</html>
